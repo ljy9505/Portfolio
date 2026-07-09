@@ -142,6 +142,11 @@
     border-radius:18px;border:1px solid var(--line-2);
     box-shadow:0 40px 120px rgba(0,0,0,.8);
   }
+  .lightbox img.round{
+    width:min(78vw,440px);height:min(78vw,440px);
+    border-radius:50%;object-fit:cover;object-position:50% 22%;
+    border:2px solid rgba(255,107,44,.5);
+  }
   .lb-close{
     position:absolute;top:22px;right:22px;z-index:2;
     width:46px;height:46px;border-radius:50%;cursor:pointer;
@@ -641,7 +646,7 @@
         <div class="ver">v2.0 <time>2025 - 현재</time></div>
         <h4>Product Builder</h4>
         <p>자체 플랫폼 Campfire, AI Agent 3종, AI 심사 시스템, 전사 자동화를 기획에서 구현, 배포까지 직접 완결했습니다.</p>
-        <div class="card-now">다음 릴리스는 당신의 팀과 함께 만들고 싶습니다.<br>AX 역량을 최대로 끌어올려 조직의 일하는 방식을 바꾸고, 숫자로 증명되는 비즈니스 임팩트를 만들어 나가겠습니다.</div>
+        <div class="card-now">다음 릴리스는 앞으로 함께할 팀과 만들어 가고 싶습니다.<br>AX 역량을 최대로 끌어올려 조직의 일하는 방식을 바꾸고, 숫자로 증명되는 비즈니스 임팩트를 만들어 나가겠습니다.</div>
       </div>
     </div>
   </div>
@@ -900,8 +905,9 @@
   /* ---------- 라이트박스 (프로필, 케이스 화면 확대) ---------- */
   const lb = document.getElementById('lightbox');
   const lbImg = lb.querySelector('img');
-  function openLb(src, alt) {
+  function openLb(src, alt, round) {
     lbImg.src = src; lbImg.alt = alt || '';
+    lbImg.classList.toggle('round', !!round);
     lb.hidden = false;
     document.body.style.overflow = 'hidden';
   }
@@ -915,7 +921,7 @@
   const mark = document.querySelector('.mark');
   mark?.addEventListener('click', () => {
     const im = mark.querySelector('img');
-    if (im && im.complete && im.naturalWidth) openLb(im.src, im.alt);
+    if (im && im.complete && im.naturalWidth) openLb(im.src, im.alt, true);
   });
   /* 케이스 캐러셀 이미지도 클릭 시 확대 */
   panelEl.addEventListener('click', e => {
