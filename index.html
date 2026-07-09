@@ -194,6 +194,8 @@
     font-size:.5em;font-weight:700;color:var(--ink);margin-left:7px;letter-spacing:0;
   }
   .stat .d{font-size:12.5px;color:var(--ink-3);line-height:1.5}
+  .panel-cap{text-align:center;font-size:13px;color:var(--ink-3);padding:16px 8px 6px}
+  .panel-cap a{color:var(--orange);font-weight:600}
   @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.stats{grid-template-columns:1fr}}
 
@@ -324,7 +326,8 @@
   .car-btn[disabled]{opacity:.3;cursor:default}
   .car-prev{left:14px}
   .car-next{right:14px}
-  .car-dots{display:flex;gap:8px;justify-content:center;margin-top:16px}
+  .car-cap{text-align:center;margin-top:14px;font-size:13.5px;color:var(--ink-3)}
+  .car-dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
   .car-dot{
     width:8px;height:8px;border-radius:50%;border:0;padding:0;cursor:pointer;
     background:rgba(255,255,255,.18);transition:.15s;
@@ -492,6 +495,7 @@
           <div class="d">전사 반복 업무를 n8n 워크플로우로 대체해 매월 0.4MM의 인력을 절감하고 있습니다.</div>
         </div>
       </div>
+      <p class="panel-cap">4개의 프로젝트에서 검증된 숫자입니다. 근거가 된 실제 화면은 <a href="#cases">아래 케이스</a>에서 확인할 수 있습니다.</p>
     </div>
   </div>
 </header>
@@ -666,7 +670,7 @@
         <div class="ver">v2.0 <time>2025 - 현재</time></div>
         <h4>Product Builder</h4>
         <p>자체 플랫폼 Campfire, AI Agent 3종, AI 심사 시스템, 전사 자동화를 기획에서 구현, 배포까지 직접 완결했습니다.</p>
-        <div class="card-now">지금도 버전을 올리는 중입니다.<br>다음 릴리스는 새로운 팀에서, AX로 조직의 일하는 방식을 함께 바꾸는 버전이 되길 바랍니다.</div>
+        <div class="card-now">지금도 버전을 계속 올리는 중입니다.<br>다음 릴리스는 합류할 팀에서 나옵니다.<br>AX 역량을 최대로 끌어올려, 조직의 일하는 방식을 바꾸고 숫자로 증명되는 비즈니스 임팩트를 만들겠습니다.</div>
       </div>
     </div>
   </div>
@@ -772,6 +776,13 @@
       head: '사용할 수 있는 데이터가 없어서, 플랫폼을 직접 만들기로 했습니다.',
       judge: '오픈소스로 빠르게 검증한 뒤, 통제와 확장의 한계를 확인하고 완전 자체 개발로 전환했습니다. 내재화한 데이터 위에 AI Agent 3종(ELI, ALEX, NEO)을 얹었습니다.',
       chips: ['학습 참여도 +20%', '외부 도구 2종 → 0종', 'AI Agent 3종 출시'],
+      videoCap: 'Campfire에서 실시간 수업과 채팅이 한 화면에서 진행되는 모습입니다.',
+      caps: [
+        '강의장 공지 채널과 조별 그룹 관리 화면입니다.',
+        'AI 튜터 ALEX가 수업 내용을 요약하고 1:1 질문에 답하는 화면입니다.',
+        '대화로 학습 니즈를 파악해 과정을 추천하는 ELI 화면입니다.',
+        '학습 데이터를 종합해 자동 생성되는 NEO 성장 리포트입니다.'
+      ],
       alt: 'Campfire 실제 화면'
     },
     {
@@ -780,6 +791,10 @@
       head: 'AI에게 맡길 범위부터 정했습니다.',
       judge: '"AI 자동화의 범위는 판단 근거가 데이터 안에 존재하는가로 가른다"는 원칙으로, AI 추천과 사람의 최종 결정을 나눴습니다. 개인정보 비식별 전처리를 파이프라인 첫 단계에 뒀습니다.',
       chips: ['심사 60분 → 10분', '합격 기준 단일 표준화'],
+      caps: [
+        'AI 적합성 요약이 함께 표시되는 지원자 심사 어드민입니다. (개인정보 블러 처리)',
+        'AI가 판정 근거와 강점, 보완점까지 정리해 주는 적합성 요약 상세입니다.'
+      ],
       alt: 'AI 지원자 심사 어드민 실제 화면'
     },
     {
@@ -788,6 +803,10 @@
       head: '전사가 같은 숫자를 보게 만들었습니다.',
       judge: '기준을 사람이 아닌 쿼리 로직에 내재화했습니다. BigQuery 마트 11종과 전사 Event Dictionary를 설계했습니다.',
       chips: ['수기 보고 100% 자동화', '데이터 정합성 90% 이상'],
+      caps: [
+        '과정별 출석률 위험군을 실시간으로 보여주는 Looker Studio 대시보드입니다.',
+        '훈련생 이탈 추이와 진행 중 과정의 리스크를 추적하는 대시보드입니다.'
+      ],
       alt: 'Looker Studio 대시보드 실제 화면'
     },
     {
@@ -796,6 +815,9 @@
       head: '도구 선택부터 속인화 해소까지, 업무 자동화 시스템을 구축했습니다.',
       judge: '태스크 과금형 SaaS 대신 self-hosted 방식을 택하고, 문서화, Git 버전 관리, 실패 알림으로 담당자가 바뀌어도 유지되는 구조를 만들었습니다.',
       chips: ['월 0.4MM 인력 절감', '인프라 구독료 0원'],
+      caps: [
+        '데이터, 마케팅, HR 등 전사 반복 업무를 대체하는 n8n 워크플로우 전체 맵입니다.'
+      ],
       alt: 'n8n 워크플로우 실제 화면'
     }
   ];
@@ -851,10 +873,20 @@
     const frame = panelEl.querySelector('.car-frame');
     if (!frame) return;
     const slides = [];
-    if (c.video) slides.push(`<video src="${c.video}" muted loop autoplay playsinline aria-label="${esc(c.alt)} 영상"></video>`);
-    imgs.forEach((s, i) => slides.push(`<img src="${s}" alt="${esc(c.alt)} ${i + 1}/${imgs.length}">`));
+    const caps = [];
+    if (c.video) {
+      slides.push(`<video src="${c.video}" muted loop autoplay playsinline aria-label="${esc(c.alt)} 영상"></video>`);
+      caps.push(c.videoCap || '');
+    }
+    imgs.forEach((s, i) => {
+      const cap = (c.caps || [])[i] || '';
+      slides.push(`<img src="${s}" alt="${esc(cap || c.alt + ' ' + (i + 1))}">`);
+      caps.push(cap);
+    });
     const total = slides.length;
     frame.innerHTML = `<div class="car-track">${slides.join('')}</div>`;
+    frame.insertAdjacentHTML('afterend', `<p class="car-cap">${esc(caps[0] || '')}</p>`);
+    const capEl = frame.parentElement.querySelector('.car-cap');
     const vid = frame.querySelector('video');
     if (vid) { vid.muted = true; vid.play().catch(() => {}); }
     if (total > 1) {
@@ -875,6 +907,7 @@
         dots.forEach((d, i) => d.classList.toggle('on', i === cur));
         prev.disabled = cur === 0;
         next.disabled = cur === total - 1;
+        capEl.textContent = caps[cur] || '';
       };
       prev.addEventListener('click', () => { if (cur > 0) { cur--; update(); } });
       next.addEventListener('click', () => { if (cur < total - 1) { cur++; update(); } });
