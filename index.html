@@ -446,7 +446,6 @@
         <a href="#builder">Builder</a>
         <a href="#cases">Cases</a>
         <a href="#principles">Principles</a>
-        <a href="#stack">AI Stack</a>
         <a href="#changelog">Changelog</a>
       </div>
       <a class="nav-cta" href="mailto:ljy9505@gmail.com">이메일 보내기</a>
@@ -457,7 +456,6 @@
     <a href="#builder">Builder</a>
     <a href="#cases">Cases</a>
     <a href="#principles">Principles</a>
-    <a href="#stack">AI Stack</a>
     <a href="#changelog">Changelog</a>
   </div>
 </nav>
@@ -506,7 +504,7 @@
     <div class="sec-head">
       <span class="label reveal">From PM to Product Builder</span>
       <h2 class="h2 reveal">기획서가 아니라,<br><em>동작하는 제품으로 말합니다.</em></h2>
-      <p class="sub reveal">기획에서 멈추지 않고 구현과 배포, 운영까지.<br>일하는 방식 자체를 Builder로 바꿔 왔습니다.</p>
+      <p class="sub reveal">기획에서 멈추지 않고 구현, 배포, 운영까지 일하는 방식을 바꿔 왔습니다.</p>
     </div>
     <div class="bento">
       <div class="bcard reveal">
@@ -523,7 +521,7 @@
       <div class="bcard reveal">
         <span class="step">02 구현</span>
         <h3>직접 만듭니다</h3>
-        <p>바이브코딩으로 가이드 사이트를 구축하고, BigQuery 마트 11종과 STT 파이프라인을 직접 설계합니다.</p>
+        <p>Claude Code 바이브코딩으로 가이드 사이트와 어드민 도구를 구현하고, BigQuery 마트 11종과 STT 파이프라인을 직접 설계합니다.</p>
         <div class="gfx">
           <div class="row short"></div>
           <div class="row hot" style="margin-left:24px"></div>
@@ -534,7 +532,7 @@
       <div class="bcard reveal">
         <span class="step">03 배포와 운영</span>
         <h3>히스토리를 남기며 관리합니다</h3>
-        <p>모든 변경을 Git으로 버전 관리하고 문서로 기록해, 누가 언제 무엇을 왜 바꿨는지 추적할 수 있게 만듭니다.<br>담당자가 바뀌어도 운영이 멈추지 않는 이유입니다.</p>
+        <p>모든 변경을 Git과 문서로 기록해 누가 언제 무엇을 왜 바꿨는지 추적하게 만들고, 반복 운영은 n8n, MCP 자동화로 대체합니다.</p>
         <div class="gfx">
           <div class="nodes">
             <div class="node"></div><div class="edge"></div>
@@ -560,7 +558,7 @@
         <ul>
           <li>기획서를 쓰고 디자인이 나올 때까지 기다립니다</li>
           <li>디자인 피드백과 개발 협의를 오가는 사이에 요구사항이 또 바뀝니다</li>
-          <li>같은 내용을 문서, 회의, 메신저로 반복 전달하며 커뮤니케이션 코스트가 쌓입니다</li>
+          <li>같은 내용을 문서와 회의로 반복 전달하며 커뮤니케이션 코스트가 쌓입니다</li>
           <li>동작하는 화면은 출시 직전에야 처음 확인합니다</li>
         </ul>
       </div>
@@ -584,7 +582,7 @@
     <div class="sec-head" style="margin-bottom:0">
       <span class="label reveal">Selected Cases</span>
       <h2 class="h2 reveal">결정이 있었던 일들만<br><em>담았습니다.</em></h2>
-      <p class="sub reveal" style="margin-bottom:52px">이 프로젝트들을 지나오며 지금의 업무 방식으로 업그레이드해 왔습니다.<br>현재의 저를 가장 잘 보여주는 케이스만 골라 담았고, 실제 화면은 좌우로 넘겨볼 수 있습니다.</p>
+      <p class="sub reveal" style="margin-bottom:52px">이 프로젝트들을 지나며 지금의 일하는 방식이 만들어졌습니다.<br>실제 화면은 좌우로 넘겨볼 수 있습니다.</p>
     </div>
     <div class="tabs reveal" role="tablist" aria-label="케이스 선택"></div>
     <div id="case-panel"></div>
@@ -597,47 +595,20 @@
     <div class="steps-left">
       <span class="label reveal">Principles</span>
       <h2 class="h2 reveal">반복해서 쓰는<br><em>판단 기준이 있습니다.</em></h2>
-      <p class="reveal">케이스마다 다른 답을 냈지만, 답을 고르는 기준은 같았습니다.<br>시행착오에서 배운 것을 원칙으로 만들어 다음 판단에 다시 씁니다.</p>
+      <p class="reveal">케이스마다 답은 달랐지만, 고르는 기준은 같았습니다.</p>
     </div>
     <div class="steps-panel reveal">
       <div class="step-card">
         <span class="n">1</span><h4>AI 자동화의 범위</h4>
-        <p>판단 근거가 데이터 안에 존재하는가로 가릅니다.<br>텍스트 밖의 판단과 예외는 사람의 영역으로 남깁니다.</p>
+        <p>판단 근거가 데이터 안에 존재하는가로 가릅니다.</p>
       </div>
       <div class="step-card">
         <span class="n">2</span><h4>PoC 검증의 기준</h4>
-        <p>"동작하는가"가 아니라 "통제하고 확장할 수 있는가"까지 봅니다.<br>오픈소스 전환 비용을 치르며 배운 기준입니다.</p>
+        <p>"동작하는가"가 아니라 "통제하고 확장할 수 있는가"까지 봅니다.</p>
       </div>
       <div class="step-card">
         <span class="n">3</span><h4>완성의 기준</h4>
-        <p>내가 없어도 유지보수 가능한 구조.<br>문서화, Git 버전 관리, 실패 알림으로 속인화를 해소합니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= AI STACK ================= -->
-<section id="stack" style="padding-top:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="label reveal">How I Use AI</span>
-      <h2 class="h2 reveal">AI는 문서가 아니라<br><em>워크플로우 안에 있습니다.</em></h2>
-    </div>
-    <div class="bento">
-      <div class="bcard reveal">
-        <span class="step">바이브코딩</span>
-        <h3>Claude Code, Claude</h3>
-        <p>가이드 사이트와 어드민 도구를 직접 구현해 Cloudflare Pages, Git으로 자동 배포합니다.<br>기획서 대신 동작하는 결과물로 논의를 시작합니다.</p>
-      </div>
-      <div class="bcard reveal">
-        <span class="step">AI 제품 설계</span>
-        <h3>프롬프트 정책, 품질 기준</h3>
-        <p>AI Agent 3종과 심사 시스템의 프롬프트 정책, 답변 품질 기준, 예외 처리 규칙을 문서로 먼저 정의하고 출시까지 운영합니다.</p>
-      </div>
-      <div class="bcard reveal">
-        <span class="step">자동화 운영</span>
-        <h3>n8n, MCP, BigQuery</h3>
-        <p>데이터 가공, 지원서 추출, HR 알림까지 전사 반복 업무를 워크플로우로 대체하고, 데이터 파이프라인과 연결합니다.</p>
+        <p>내가 없어도 유지보수 가능한 구조를 완성의 기준으로 삼습니다.</p>
       </div>
     </div>
   </div>
@@ -654,7 +625,7 @@
       <div class="log-item reveal">
         <div class="ver">v0.1 <time>2020.05 - 2021.05</time></div>
         <h4>로체시스템즈, 연구원</h4>
-        <p>Display 설비의 UI 제어와 데이터 로깅 기능을 개발했습니다.<br>기술을 다루고 개발자와 협업하는 기본기를 여기서 배웠습니다.</p>
+        <p>Display 설비의 UI 제어와 데이터 로깅 기능을 개발하며 개발자와 협업하는 기본기를 배웠습니다.</p>
       </div>
       <div class="log-item reveal">
         <div class="ver">v1.0 <time>2022.05</time></div>
@@ -664,7 +635,7 @@
       <div class="log-item reveal">
         <div class="ver">v1.5 <time>2023 - 2025</time></div>
         <h4>Product Manager</h4>
-        <p>모바일 앱 단독 구축, VOC 정기 분석 체계, 데이터 기반 지원율 최적화까지.<br>기획과 데이터 사이의 경계를 넓혔습니다.</p>
+        <p>모바일 앱 단독 구축, VOC 분석 체계, 지원율 최적화로 기획과 데이터의 경계를 넓혔습니다.</p>
       </div>
       <div class="log-item now reveal">
         <div class="ver">v2.0 <time>2025 - 현재</time></div>
