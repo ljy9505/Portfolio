@@ -61,6 +61,33 @@
   }
   .nav-cta:hover{filter:brightness(1.1)}
   @media(max-width:860px){.nav-links{display:none}}
+  /* nav scrollspy */
+  .nav-links a{position:relative;transition:color .2s}
+  .nav-links a::after{
+    content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%) scaleX(0);
+    width:100%;height:2px;border-radius:2px;background:var(--orange);
+    transition:transform .25s cubic-bezier(.2,.6,.2,1);transform-origin:center;
+  }
+  .nav-links a.on{color:var(--ink)}
+  .nav-links a.on::after{transform:translateX(-50%) scaleX(.55)}
+  /* mobile menu */
+  .menu-btn{
+    display:none;width:40px;height:40px;border-radius:10px;cursor:pointer;
+    border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink);
+    font-size:17px;line-height:1;flex:none;
+  }
+  @media(max-width:860px){.menu-btn{display:block}}
+  .m-menu{
+    display:none;border-top:1px solid var(--line);
+    background:rgba(0,0,0,.92);backdrop-filter:blur(14px);
+  }
+  .m-menu.open{display:block}
+  .m-menu a{
+    display:block;padding:15px 24px;font-size:15px;font-weight:600;
+    color:var(--ink-2);border-bottom:1px solid var(--line);
+  }
+  .m-menu a:last-child{border-bottom:0}
+  .m-menu a:active{color:var(--orange)}
 
   /* ================= section rhythm ================= */
   section{position:relative;isolation:isolate;padding:130px 0}
@@ -162,6 +189,7 @@
     letter-spacing:-.02em;margin:8px 0 10px;font-variant-numeric:tabular-nums;
     white-space:nowrap;
   }
+  .stat .v .num{display:inline-block;min-width:2ch;text-align:left}
   .stat .v small{
     font-size:.5em;font-weight:700;color:var(--ink);margin-left:7px;letter-spacing:0;
   }
@@ -209,7 +237,7 @@
   @keyframes pulse{0%,100%{box-shadow:0 0 18px rgba(255,107,44,.4)}50%{box-shadow:0 0 34px rgba(255,107,44,.75)}}
 
   /* ================= comparison ================= */
-  .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;position:relative}
   @media(max-width:860px){.compare{grid-template-columns:1fr}}
   .cmp{border-radius:var(--r);padding:42px 40px}
   .cmp h3{text-align:center;font-size:19px;font-weight:800;margin-bottom:34px}
@@ -229,6 +257,15 @@
   }
   .cmp-new h3{color:#fff}
   .cmp-new li{border-top:1px dashed rgba(255,255,255,.28);font-weight:600}
+  .cmp-arrow{
+    position:absolute;z-index:2;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:52px;height:52px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:#0c0c0e;border:1px solid rgba(255,107,44,.5);
+    color:var(--orange);font-size:20px;font-weight:800;
+    box-shadow:0 0 30px rgba(255,107,44,.35), 0 8px 24px rgba(0,0,0,.6);
+  }
+  @media(max-width:860px){.cmp-arrow{transform:translate(-50%,-50%) rotate(90deg)}}
 
   /* ================= cases (tab switcher + carousel) ================= */
   .tabs{
@@ -276,7 +313,7 @@
     border:1px solid var(--line-2);background:#0c0d0f;aspect-ratio:16/9;
   }
   .car-track{display:flex;height:100%;transition:transform .45s cubic-bezier(.25,.7,.25,1)}
-  .car-track img{width:100%;height:100%;object-fit:contain;flex:none;display:block}
+  .car-track img,.car-track video{width:100%;height:100%;object-fit:contain;flex:none;display:block}
   .car-btn{
     position:absolute;top:50%;transform:translateY(-50%);z-index:2;
     width:42px;height:42px;border-radius:50%;cursor:pointer;
@@ -340,15 +377,6 @@
   .step-card h4{display:inline;font-size:16.5px;font-weight:800;vertical-align:middle}
   .step-card p{color:var(--ink-2);font-size:14px;margin-top:12px}
 
-  /* ================= stack ================= */
-  .meta-callout{
-    margin-top:40px;text-align:center;
-    border:1px dashed rgba(255,107,44,.45);border-radius:16px;
-    padding:28px 24px;color:var(--ink-2);font-size:15.5px;
-    background:linear-gradient(100deg,rgba(255,107,44,.09),transparent 60%);
-  }
-  .meta-callout b{color:var(--orange)}
-
   /* ================= changelog ================= */
   .log{position:relative;max-width:720px;margin:0 auto;padding-left:40px;border-left:1px solid var(--line-2)}
   .log-item{position:relative;padding-bottom:54px}
@@ -405,13 +433,13 @@
   <div class="wrap nav-in">
     <div class="logo">
       <button class="mark" aria-label="프로필 사진 크게 보기">
-        <img src="img/profile.png" alt="이준영 프로필 사진"
-             onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='img/profile.jpg'}else{this.remove()}">
+        <img src="img/profile.jpg" alt="이준영 프로필 사진"
+             onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='img/profile.png'}else{this.remove()}">
       </button>
       <a href="#top">이준영</a>
     </div>
     <div class="nav-right">
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         <a href="#builder">Builder</a>
         <a href="#cases">Cases</a>
         <a href="#principles">Principles</a>
@@ -419,7 +447,15 @@
         <a href="#changelog">Changelog</a>
       </div>
       <a class="nav-cta" href="mailto:ljy9505@gmail.com">이메일 보내기</a>
+      <button class="menu-btn" id="menu-btn" aria-label="메뉴 열기" aria-expanded="false">&#9776;</button>
     </div>
+  </div>
+  <div class="m-menu" id="m-menu">
+    <a href="#builder">Builder</a>
+    <a href="#cases">Cases</a>
+    <a href="#principles">Principles</a>
+    <a href="#stack">AI Stack</a>
+    <a href="#changelog">Changelog</a>
   </div>
 </nav>
 
@@ -437,22 +473,22 @@
       <div class="stats">
         <div class="stat">
           <div class="k">학습 참여도</div>
-          <div class="v">20%<small>증가</small></div>
+          <div class="v"><span class="num" data-to="20" data-suffix="%">20%</span><small>증가</small></div>
           <div class="d">자체 플랫폼 구축 후 설문, 퀴즈, 평가, 제출률을 종합해 Discord 운영 시기와 비교한 수치입니다.</div>
         </div>
         <div class="stat">
           <div class="k">지원자 심사 시간</div>
-          <div class="v">83%<small>감소</small></div>
+          <div class="v"><span class="num" data-to="83" data-suffix="%">83%</span><small>감소</small></div>
           <div class="d">담당자 1인당 하루 60분 걸리던 지원서 심사가 AI 자동 심사 도입 후 10분으로 줄었습니다.</div>
         </div>
         <div class="stat">
           <div class="k">수기 보고</div>
-          <div class="v">100%<small>자동화</small></div>
+          <div class="v"><span class="num" data-to="100" data-suffix="%">100%</span><small>자동화</small></div>
           <div class="d">전사 데이터 마트를 설계해 수기 보고를 없애고 데이터 정합성 90% 이상을 확보했습니다.</div>
         </div>
         <div class="stat">
           <div class="k">월 반복 업무 인력</div>
-          <div class="v">0.4MM<small>절감</small></div>
+          <div class="v"><span class="num" data-to="0.4" data-decimals="1" data-suffix="MM">0.4MM</span><small>절감</small></div>
           <div class="d">전사 반복 업무를 n8n 워크플로우로 대체해 매월 0.4MM의 인력을 절감하고 있습니다.</div>
         </div>
       </div>
@@ -524,6 +560,7 @@
           <li>동작하는 화면은 출시 직전에야 처음 확인합니다</li>
         </ul>
       </div>
+      <div class="cmp-arrow" aria-hidden="true">&#8594;</div>
       <div class="cmp cmp-new reveal">
         <h3>현재 일하는 방식</h3>
         <ul>
@@ -599,9 +636,6 @@
         <p>데이터 가공, 지원서 추출, HR 알림까지 전사 반복 업무를 워크플로우로 대체하고, 데이터 파이프라인과 연결합니다.</p>
       </div>
     </div>
-    <div class="meta-callout reveal">
-      <b>이 페이지가 그 증거입니다.</b><br>기획부터 카피, 코드, 배포까지 Claude Code와 함께 만들어 Cloudflare Pages로 서비스하고 있습니다.
-    </div>
   </div>
 </section>
 
@@ -632,7 +666,7 @@
         <div class="ver">v2.0 <time>2025 - 현재</time></div>
         <h4>Product Builder</h4>
         <p>자체 플랫폼 Campfire, AI Agent 3종, AI 심사 시스템, 전사 자동화를 기획에서 구현, 배포까지 직접 완결했습니다.</p>
-        <div class="card-now">지금도 버전을 올리는 중입니다.<br>이 페이지가 다음 릴리스 노트입니다.</div>
+        <div class="card-now">지금도 버전을 올리는 중입니다.<br>다음 릴리스는 새로운 팀에서, AX로 조직의 일하는 방식을 함께 바꾸는 버전이 되길 바랍니다.</div>
       </div>
     </div>
   </div>
@@ -658,7 +692,7 @@
 
 <div class="lightbox" id="lightbox" hidden>
   <button class="lb-close" aria-label="닫기">&#10005;</button>
-  <img src="" alt="">
+  <img alt="">
 </div>
 
 <script>
@@ -677,10 +711,63 @@
   }, {threshold: .12});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  /* ---------- 숫자 카운트업 ---------- */
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cntIO = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      cntIO.unobserve(e.target);
+      const el = e.target;
+      const to = parseFloat(el.dataset.to);
+      const dec = parseInt(el.dataset.decimals || '0', 10);
+      const suf = el.dataset.suffix || '';
+      if (reduceMotion) { el.textContent = to.toFixed(dec) + suf; return; }
+      const dur = 1100, t0 = performance.now();
+      (function tick(t) {
+        const p = Math.min((t - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (to * eased).toFixed(dec) + suf;
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    });
+  }, {threshold: .6});
+  document.querySelectorAll('.stat .num').forEach(el => cntIO.observe(el));
+
+  /* ---------- 네비게이션 스크롤스파이 ---------- */
+  const spyLinks = [...document.querySelectorAll('#nav-links a')];
+  const spyMap = new Map();
+  spyLinks.forEach(a => {
+    const sec = document.querySelector(a.getAttribute('href'));
+    if (sec) spyMap.set(sec, a);
+  });
+  const spyIO = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      spyLinks.forEach(a => a.classList.remove('on'));
+      spyMap.get(e.target)?.classList.add('on');
+    });
+  }, {rootMargin: '-30% 0px -55% 0px'});
+  spyMap.forEach((_, sec) => spyIO.observe(sec));
+
+  /* ---------- 모바일 메뉴 ---------- */
+  const menuBtn = document.getElementById('menu-btn');
+  const mMenu = document.getElementById('m-menu');
+  menuBtn.addEventListener('click', () => {
+    const open = mMenu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.innerHTML = open ? '&#10005;' : '&#9776;';
+  });
+  mMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mMenu.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.innerHTML = '&#9776;';
+  }));
+
   /* ---------- 케이스 탭 + 이미지 캐러셀 ---------- */
   const CASES = [
     {
       key: 'case01', tab: '자체 플랫폼 구축', num: 'CASE 01',
+      video: 'img/case01-video.mp4',
       title: '자체 강의 플랫폼 Campfire와 AI Agent 확장',
       head: '사용할 수 있는 데이터가 없어서, 플랫폼을 직접 만들기로 했습니다.',
       judge: '오픈소스로 빠르게 검증한 뒤, 통제와 확장의 한계를 확인하고 완전 자체 개발로 전환했습니다. 내재화한 데이터 위에 AI Agent 3종(ELI, ALEX, NEO)을 얹었습니다.',
@@ -760,20 +847,23 @@
 
     const imgs = await loadImages(c.key);
     if (CASES.indexOf(c) !== current) return; /* 로드 중 다른 탭으로 전환됨 */
-    if (!imgs.length) return; /* 이미지가 없으면 플레이스홀더 유지 */
+    if (!imgs.length && !c.video) return; /* 미디어가 없으면 플레이스홀더 유지 */
     const frame = panelEl.querySelector('.car-frame');
     if (!frame) return;
-    frame.innerHTML = `
-      <div class="car-track">${imgs.map((s, i) =>
-        `<img src="${s}" alt="${esc(c.alt)} ${i + 1}/${imgs.length}">`).join('')}</div>`;
-    let dotsHtml = '';
-    if (imgs.length > 1) {
+    const slides = [];
+    if (c.video) slides.push(`<video src="${c.video}" muted loop autoplay playsinline aria-label="${esc(c.alt)} 영상"></video>`);
+    imgs.forEach((s, i) => slides.push(`<img src="${s}" alt="${esc(c.alt)} ${i + 1}/${imgs.length}">`));
+    const total = slides.length;
+    frame.innerHTML = `<div class="car-track">${slides.join('')}</div>`;
+    const vid = frame.querySelector('video');
+    if (vid) { vid.muted = true; vid.play().catch(() => {}); }
+    if (total > 1) {
       frame.insertAdjacentHTML('beforeend', `
         <button class="car-btn car-prev" aria-label="이전 화면">&#8592;</button>
         <button class="car-btn car-next" aria-label="다음 화면">&#8594;</button>`);
-      dotsHtml = `<div class="car-dots">${imgs.map((_, i) =>
-        `<button class="car-dot${i === 0 ? ' on' : ''}" aria-label="${i + 1}번째 화면"></button>`).join('')}</div>`;
-      frame.parentElement.insertAdjacentHTML('beforeend', dotsHtml);
+      frame.parentElement.insertAdjacentHTML('beforeend',
+        `<div class="car-dots">${slides.map((_, i) =>
+          `<button class="car-dot${i === 0 ? ' on' : ''}" aria-label="${i + 1}번째 화면"></button>`).join('')}</div>`);
 
       const track = frame.querySelector('.car-track');
       const prev = frame.querySelector('.car-prev');
@@ -784,10 +874,10 @@
         track.style.transform = `translateX(-${cur * 100}%)`;
         dots.forEach((d, i) => d.classList.toggle('on', i === cur));
         prev.disabled = cur === 0;
-        next.disabled = cur === imgs.length - 1;
+        next.disabled = cur === total - 1;
       };
       prev.addEventListener('click', () => { if (cur > 0) { cur--; update(); } });
-      next.addEventListener('click', () => { if (cur < imgs.length - 1) { cur++; update(); } });
+      next.addEventListener('click', () => { if (cur < total - 1) { cur++; update(); } });
       dots.forEach((d, i) => d.addEventListener('click', () => { cur = i; update(); }));
       /* 터치 스와이프 */
       let sx = null;
@@ -795,7 +885,7 @@
       frame.addEventListener('touchend', e => {
         if (sx === null) return;
         const dx = e.changedTouches[0].clientX - sx;
-        if (dx < -40 && cur < imgs.length - 1) { cur++; update(); }
+        if (dx < -40 && cur < total - 1) { cur++; update(); }
         if (dx > 40 && cur > 0) { cur--; update(); }
         sx = null;
       }, {passive: true});
@@ -812,7 +902,7 @@
     document.body.style.overflow = 'hidden';
   }
   function closeLb() {
-    lb.hidden = true; lbImg.src = '';
+    lb.hidden = true; lbImg.removeAttribute('src');
     document.body.style.overflow = '';
   }
   lb.querySelector('.lb-close').addEventListener('click', closeLb);
